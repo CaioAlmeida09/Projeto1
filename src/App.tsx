@@ -1,58 +1,70 @@
 import "./stule.css";
 import { useState } from "react";
 
-interface AlunoProps {
-  nome: string;
-  idade: string;
-}
-
 function App() {
-  const [aluno, setAluno] = useState("");
-  const [idade, setIdade] = useState("");
-  const [infoaluno, setInfoaluno] = useState<AlunoProps>();
-  const [contador, setContador] = useState(0);
+  const [lista, setLista] = useState([
+    "Corrida matinal",
+    "Café da manhã",
+    "Estudar",
+  ]);
 
-  function TrocarAluno() {
-    setInfoaluno({
-      nome: aluno,
-      idade: idade,
-    });
-  }
-  function Soma() {
-    setContador(contador + 1);
-  }
-  function Dimi() {
-    if (contador === 0) {
+  const [input, setInput] = useState("");
+  const [concluido, setConcluido] = useState([]);
+
+  function AddAtividade() {
+    if (!input) {
+      alert("digite uma atividade");
       return;
     }
-    setContador(contador - 1);
+    const NewLista = [...lista, input];
+    setLista(NewLista);
+    setInput("");
   }
+  function deletar(task: string) {
+    const ListDelete = lista.filter((item) => task !== item);
+    setLista(ListDelete);
+  }
+  function conclusao(task: string) {
+    const listDelete = [...concluido, task];
+    setConcluido(listDelete);
+  }
+
   return (
-    <div>
-      <input
-        onChange={(e) => setAluno(e.target.value)}
-        placeholder="Digite seu nome"
-        value={aluno}
-      ></input>
+    <div className="Principal">
+      <h1> Lista de atividades a fazer</h1>
       <br />
-      <input
-        placeholder="Digite sua idade"
-        onChange={(e) => setIdade(e.target.value)}
-        value={idade}
-      ></input>{" "}
-      <br />
-      <button onClick={TrocarAluno}>ação</button>
-      <br />
-      <h2>Alunos:</h2>
-      <p>Nome: {infoaluno?.nome}</p>
-      <p>Idade: {infoaluno?.idade}</p>
-      <br />
-      <h1> Contador use state</h1>
-      <button onClick={Soma}> + </button>
-      {contador}
-      <button onClick={Dimi}> - </button>
+      <section className="inputAtiv">
+        <input
+          className="input"
+          placeholder="digite a próxima tarefa..."
+          onChange={(e) => setInput(e.target.value)}
+          value={input}
+        ></input>
+        <button className="addAtiv" onClick={AddAtividade}>
+          {" "}
+          Adicionar atividade
+        </button>
+      </section>
+      {lista.map((item) => (
+        <section className="newAtiv" key={item}>
+          <span className="item"> {item}</span>
+          <button className="button" onClick={() => deletar(item)}>
+            {" "}
+            Excluir Atividade
+          </button>
+          <button className="button" onClick={() => conclusao(item)}>
+            {" "}
+            Atividade realizada{" "}
+          </button>
+        </section>
+      ))}
+      <h1> Lista de atividades concluídas</h1>
+      {concluido.map((item) => (
+        <section className="AtivConcluida">
+          <span> {item} </span>
+        </section>
+      ))}
     </div>
   );
 }
-
 export default App;
