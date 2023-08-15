@@ -1,1 +1,52 @@
+* {
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 
+.Principal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: pink;
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+}
+.inputAtiv {
+  display: flex;
+  gap: 15px;
+  margin: 20px auto;
+}
+.input {
+  width: 200px;
+  height: 30px;
+}
+.addAtiv {
+  border-radius: 15px;
+  cursor: pointer;
+}
+.addAtiv:hover {
+  background: black;
+  color: #fff;
+}
+.newAtiv {
+  display: flex;
+  width: 400px;
+  height: 55px;
+  align-items: center;
+  border-radius: 5px;
+  border: 2px solid #fff;
+  margin: 15px;
+  font-size: 18px;
+  font-family: Bold;
+}
+.item {
+  font-weight: bold;
+  color: #fff;
+  font-size: 22px;
+}
+img {
+  width: 20px;
+  height: 20px;
+}
